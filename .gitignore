@@ -77,6 +77,9 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# Twitter Keys
+2_twitter-data-extraction\twitter_keys.ipynb
+
 # IPython
 profile_default/
 ipython_config.py
