@@ -42,28 +42,34 @@ if __name__ == "__main__":
     # IDs of tweets
     tweet_id = []
     # add queries to search
-    queries = ['Mundial', 'Qatar', '#Qatar2022', 'Messi', 'Catar']
+    queries = []
+    teams = ['Argentina vs Francia']
+    players = ['Messi', 'Mbappe', 'Dibu Martinez']
+    general_hashtags = ['#Mundial2022', '#Qatar2022', '#CopaMundialFIFA']
+    queries = teams + general_hashtags + players
     rtfilter = " -filter:retweets lang:es"
     queries = [s + rtfilter for s in queries]
-    for query in queries:
-        print('Tweet api search query: ', query)
-        for tweet in tweepy.Cursor(api.search_tweets,
-                                   q=query).items(100):
-            text = tweet.text.replace('\n', ' ')
-            clean_tweet = re.sub("@[A-Za-z0-9]+", "", text)
-            clean_tweet = re.sub("#[A-Za-z0-9]+", "", clean_tweet)
-            clean_tweet = re.sub(r"http\S+", "", clean_tweet)
-            tweets.append(clean_tweet.lower())
-            tweet_id.append(tweet.id_str)
-            likes.append(tweet.favorite_count)
-            timecreated.append(tweet.created_at)
-    df = pd.DataFrame(
-        {'tweet_id': tweet_id, 'tweets': tweets, 'likes': likes, 'time': timecreated},)
-    now = datetime.now()
-    df.to_csv('D:\\FACU\\TF_CSVs\\'+'WorldCupTweets_' + str(now)[:16].replace(':', '_') + '.csv',
-              index=True,
-              encoding='utf-8-sig',
-              sep=';'
-              )
-    print('Csv created at: %s' % 'D:\\FACU\\TF_CSVs\\' +
-          'WorldCupTweets_' + str(now)[:16].replace(':', '_') + '.csv')
+    for i in [1, 2, 3, 4]:
+        print('Iteration number: %d' % i)
+        for query in queries:
+            print('Tweet api search query: ', query)
+            for tweet in tweepy.Cursor(api.search_tweets,
+                                       q=query).items(1250):
+                text = tweet.text.replace('\n', ' ')
+                clean_tweet = re.sub("@[A-Za-z0-9]+", "", text)
+                clean_tweet = re.sub(r"http\S+", "", clean_tweet)
+                tweets.append(clean_tweet.lower())
+                tweet_id.append(tweet.id_str)
+                likes.append(tweet.favorite_count)
+                timecreated.append(tweet.created_at)
+        df = pd.DataFrame(
+            {'tweet_id': tweet_id, 'tweets': tweets, 'likes': likes, 'time': timecreated},)
+        now = datetime.now()
+        df.to_csv('D:\\FACU\\TF_CSVs\\'+'WorldCupTweets_' + str(now)[:16].replace(':', '_') + '.csv',
+                  index=True,
+                  encoding='utf-8-sig',
+                  sep=';'
+                  )
+        print('Csv created at: %s' % 'D:\\FACU\\TF_CSVs\\' +
+              'WorldCupTweets_' + str(now)[:16].replace(':', '_') + '.csv')
+        time.sleep(900)
