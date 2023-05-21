@@ -1,5 +1,9 @@
-consumer_key = "ASQrvcIJ1BNpuSuRugYhWrMEK"
-consumer_secret = "AgE6jP6nzpl4Bg86QldRDkofnaEfiDExWW9Noy3PcP6dlxEIqk"
-access_token = "591401829-2cV8RgBHHuLPpCm9d5fQJEY2zyay4tV0sQXdy57Q"
-access_token_secret = "9NE6Lm8AUf4eAX6M6B76KUm5kIg8PA9KkVstwPu8nrbFJ"
-bearer_token = "AAAAAAAAAAAAAAAAAAAAABQvVwEAAAAAmVE7ZQgF9uvIeE3fUpneapfOQi4%3DJ9TfIndIwWiYeBeeWniMqHkL2zc6vJhGMqyOQP1WeSUs4UbcK9"
+"""
+This module contais is used to fill the twitter keys access.
+"""
+
+CONSUMER_KEY = ""
+CONSUMER_SECRET = ""
+ACCESS_TOKEN = ""
+ACCESS_TOKEN_SECRET = ""
+BEARER_TOKENN = ""
