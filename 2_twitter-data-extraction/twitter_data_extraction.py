@@ -1,3 +1,7 @@
+"""
+This module contains the code for processing World Cup tweets.
+"""
+
 import time
 import pandas as pd
 import re
