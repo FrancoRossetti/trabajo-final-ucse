@@ -4,28 +4,24 @@ This module contains the code for processing World Cup tweets.
 
 import time
 import re
-import sys
 from datetime import datetime
 import pandas as pd
-from twitter_keys import consumer_key, consumer_secret, access_token_secret, access_token
+from twitter_keys import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN_SECRET, ACCESS_TOKEN
 import tweepy
-
-
-def custom_error(message):
-    """Some other custom error"""
-    print("There is a problem: %s" % message)
-    sys.exit(2)
 
 # Setup access to API
 
 
 def connect_to_twitter_oauth():
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+    """
+    Function to connect to Twitter api.
+    """
+    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
     # add proxy='172.30.1.251:6969' if needed
-    api = tweepy.API(auth, wait_on_rate_limit=True)
-    return api
+    twitter_api = tweepy.API(auth, wait_on_rate_limit=True)
+    return twitter_api
 
 
 if __name__ == "__main__":
@@ -48,7 +44,7 @@ if __name__ == "__main__":
     RT_FILTER = " -filter:retweets lang:es"
     queries = [s + RT_FILTER for s in queries]
     for i in [1, 2, 3, 4]:
-        print('Iteration number: %d' % i)
+        print(f'Iteration number: {i}')
         for query in queries:
             print('Tweet api search query: ', query)
             for tweet in tweepy.Cursor(api.search_tweets,
