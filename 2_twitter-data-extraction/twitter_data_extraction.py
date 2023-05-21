@@ -3,10 +3,10 @@ This module contains the code for processing World Cup tweets.
 """
 
 import time
-import pandas as pd
 import re
 import sys
 from datetime import datetime
+import pandas as pd
 from twitter_keys import consumer_key, consumer_secret, access_token_secret, access_token
 import tweepy
 
