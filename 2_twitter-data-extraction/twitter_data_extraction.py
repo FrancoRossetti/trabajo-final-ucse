@@ -1,16 +1,10 @@
-import tweepy
 import time
 import pandas as pd
 import re
 import sys
 from datetime import datetime
 from twitter_keys import consumer_key, consumer_secret, access_token_secret, access_token
-
-
-def quit():
-    """Program was not initialized correctly"""
-    print("example: python template.py -o something_here -b")
-    sys.exit(1)
+import tweepy
 
 
 def custom_error(message):
@@ -21,7 +15,7 @@ def custom_error(message):
 # Setup access to API
 
 
-def connect_to_twitter_OAuth():
+def connect_to_twitter_oauth():
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
 
@@ -32,7 +26,7 @@ def connect_to_twitter_OAuth():
 
 if __name__ == "__main__":
     # Connect to twitter API
-    api = connect_to_twitter_OAuth()
+    api = connect_to_twitter_oauth()
     # tweet content
     tweets = []
     # likes from tweet
@@ -47,8 +41,8 @@ if __name__ == "__main__":
     players = ['Messi', 'Mbappe', 'Dibu Martinez']
     general_hashtags = ['#Mundial2022', '#Qatar2022', '#CopaMundialFIFA']
     queries = teams + general_hashtags + players
-    rtfilter = " -filter:retweets lang:es"
-    queries = [s + rtfilter for s in queries]
+    RT_FILTER = " -filter:retweets lang:es"
+    queries = [s + RT_FILTER for s in queries]
     for i in [1, 2, 3, 4]:
         print('Iteration number: %d' % i)
         for query in queries:
@@ -65,7 +59,7 @@ if __name__ == "__main__":
         df = pd.DataFrame(
             {'tweet_id': tweet_id, 'tweets': tweets, 'likes': likes, 'time': timecreated},)
         now = datetime.now()
-        df.to_csv('D:\\FACU\\TF_CSVs\\'+'WorldCupTweets_' + str(now)[:16].replace(':', '_') + '.csv',
+        df.to_csv(f"D:\\FACU\\TF_CSVs\\WorldCupTweets_{str(now)[:16].replace(':', '_')}.csv",
                   index=True,
                   encoding='utf-8-sig',
                   sep=';'
